@@ -1,20 +1,23 @@
 package app.daos;
 
-public class ActorDAO {
+import app.entities.Actor;
 
-/**
- * Fields:
- * EntityManagerFactory
+import java.util.List;
 
- * Methods:
- * create(Actor actor)
- * getById(...)
- * getAll()
- * update(Actor actor)
- * delete(...)
+    public interface ActorDAO {
 
- * Handles all database operations for Actor entities.
- */
+        void create(Actor actor);
+
+        Actor getById(int id);
+
+        Actor getByTmdbId(int tmdbId);
+
+        List<Actor> getAll();
+
+        Actor update(Actor actor);
+
+        void delete(int id);
+    }
 
 
-}
+
