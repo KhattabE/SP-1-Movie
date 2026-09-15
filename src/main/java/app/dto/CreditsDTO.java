@@ -1,17 +1,16 @@
 package app.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
+
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class CreditsDTO {
 
-    /**
-     * Fields:
-     * cast
-     * crew
-
-     * cast contains a list of CastDTO objects.
-     * crew contains a list of CrewDTO objects.
-
-     * Used to hold the credits for one movie from TMDb.
-     */
-
-
+    private List<CastDTO> cast;
+    private List<CrewDTO> crew;
 }

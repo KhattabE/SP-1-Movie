@@ -1,15 +1,14 @@
 package app.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class CastDTO {
 
-    /**
-     * Fields:
-     * id
-     * name
-
-     * Used to hold actor data from the cast
-     * returned by TMDb.
-     */
-
-
+    private int id;
+    private String name;
 }

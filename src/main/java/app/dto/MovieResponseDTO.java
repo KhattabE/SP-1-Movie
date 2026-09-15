@@ -1,18 +1,21 @@
 package app.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
+
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class MovieResponseDTO {
 
+    private int page;
 
-    /**
-     * Fields:
-     * page
-     * results
-     * totalPages
+    private List<MovieDTO> results;
 
-     * results contains a list of MovieDTO objects.
-
-     * Used for the response TMDb returns when fetching
-     * a page of movies.
-     */
-
+    @JsonProperty("total_pages")
+    private int totalPages;
 }

@@ -1,14 +1,14 @@
 package app.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class GenreDTO {
 
-    /**
-     * Fields:
-     * id
-     * name
-
-     * Used to hold genre data received from TMDb.
-     */
-
-
+    private int id;
+    private String name;
 }

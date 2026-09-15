@@ -1,16 +1,15 @@
 package app.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class CrewDTO {
 
-    /**
-     * Fields:
-     * id
-     * name
-     * job
-
-     * Used to hold crew data from TMDb.
-     * The job field is used to find the Director.
-     */
-
-
+    private int id;
+    private String name;
+    private String job;
 }
