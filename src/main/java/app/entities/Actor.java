@@ -1,19 +1,24 @@
 package app.entities;
 
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name = "actors")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Actor {
 
-    /**
-     * Fields:
-     * id
-     * tmdbId
-     * name
-     *
-     * Relationship:
-     * Connected to Movie through Movie.actors (@ManyToMany).
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-     * Methods:
-     * getters/setters
-     * constructors
-     */
+    @Column(name = "tmdb_id", unique = true, nullable = false)
+    private Integer tmdbId;
 
+    @Column(nullable = false)
+    private String name;
 }

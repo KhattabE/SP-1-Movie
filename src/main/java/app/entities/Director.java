@@ -1,24 +1,24 @@
 package app.entities;
 
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name = "directors")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Director {
 
-    /**
-     * Fields:
-     * id
-     * tmdbId
-     * name
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
+    @Column(name = "tmdb_id", unique = true, nullable = false)
+    private Integer tmdbId;
 
-     * Relationship:
-     * Connected to Movie through Movie.director (@ManyToOne).
-
-     * No movies field is needed here because
-     * "get all movies by director" is bonus functionality in the exercise.
-
-
-     * Methods:
-     * getters/setters
-     * constructors
-     */
-
+    @Column(nullable = false)
+    private String name;
 }
