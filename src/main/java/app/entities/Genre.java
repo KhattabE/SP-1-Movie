@@ -1,25 +1,24 @@
 package app.entities;
 
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name = "genres")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Genre {
 
-    /**
-     * Fields:
-     * id
-     * tmdbId
-     * name
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
+    @Column(name = "tmdb_id", unique = true, nullable = false)
+    private Integer tmdbId;
 
-     * Relationship:
-     * Connected to Movie through Movie.genres (@ManyToMany).
-
-
-     * Movies can still be searched by genre through MovieDAO,
-     * so Genre does not need its own movies collection.
-
-
-     * Methods:
-     * getters/setters
-     * constructors
-     */
-
+    @Column(nullable = false)
+    private String name;
 }
