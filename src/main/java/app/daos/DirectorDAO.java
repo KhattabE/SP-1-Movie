@@ -1,20 +1,23 @@
 package app.daos;
 
-public class DirectorDAO {
+import app.entities.Director;
 
-/**
- * Fields:
- * EntityManagerFactory
+import java.util.List;
 
- * Methods:
- * create(Director director)
- * getById(...)
- * getAll()
- * update(Director director)
- * delete(...)
+    public interface DirectorDAO {
 
- * Handles all database operations for Director entities.
- */
+        void create(Director director);
+
+        Director getById(int id);
+
+        Director getByTmdbId(int tmdbId);
+
+        List<Director> getAll();
+
+        Director update(Director director);
+
+        void delete(int id);
+    }
 
 
-}
+

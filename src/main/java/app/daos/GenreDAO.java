@@ -1,20 +1,22 @@
 package app.daos;
 
-public class GenreDAO {
+import app.entities.Genre;
 
-    /**
-     * Fields:
-     * EntityManagerFactory
+import java.util.List;
 
-     * Methods:
-     * create(Genre genre)
-     * getById(...)
-     * getAll()
-     * update(Genre genre)
-     * delete(...)
+    public interface GenreDAO {
 
-     * Handles all database operations for Genre entities.
-     */
+        void create(Genre genre);
+
+        Genre getById(int id);
+
+        Genre getByTmdbId(int tmdbId);
+
+        List<Genre> getAll();
+
+        Genre update(Genre genre);
+
+        void delete(int id);
+    }
 
 
-}

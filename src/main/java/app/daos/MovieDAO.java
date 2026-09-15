@@ -1,29 +1,35 @@
 package app.daos;
 
-public class MovieDAO {
+import app.entities.Movie;
 
-/**
- * Fields:
- * EntityManagerFactory
+import java.util.List;
 
- * Methods:
- * create(Movie movie)
- * getById(...)
- * getAll()
- * update(Movie movie)
- * delete(...)
- * searchByTitle(...)
- * getMoviesByGenre(...)
- * getAverageRating()
- * getTop10HighestRated()
- * getTop10LowestRated()
- * getTop10MostPopular()
+    public interface MovieDAO {
+
+        void create(Movie movie);
+
+        Movie getById(int id);
+
+        List<Movie> getAll();
+
+        Movie update(Movie movie);
+
+        void delete(int id);
+
+        List<Movie> searchByTitle(String search);
+
+        List<Movie> getMoviesByGenre(String genreName);
+
+        double getAverageRating();
+
+        List<Movie> getTop10HighestRated();
+
+        List<Movie> getTop10LowestRated();
+
+        List<Movie> getTop10MostPopular();
+    }
 
 
- * Handles all database operations for Movie entities.
- */
 
 
 
-
-}
