@@ -3,7 +3,7 @@ package app.services;
 import app.dto.CreditsDTO;
 import app.dto.GenreDTO;
 import app.dto.GenreResponseDTO;
-import app.dto.MovieDTO;
+import app.dto.MovieResponseDTO;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
@@ -13,6 +13,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.LocalDate;
 import java.util.List;
 
 public class TmdbService {
@@ -37,18 +38,19 @@ public class TmdbService {
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
-    public List<MovieDTO> getDanishMovies(int page) {
+    public MovieResponseDTO getDanishMovies(int page) {
+        LocalDate endDate = LocalDate.now();
+        LocalDate startDate = endDate.minusYears(5);
+
         String endpoint = "/discover/movie"
                 + "?with_origin_country=DK"
                 + "&language=da-DK"
                 + "&sort_by=popularity.desc"
-                + "&primary_release_date.gte=2021-09-15"
-                + "&primary_release_date.lte=2026-09-15"
+                + "&primary_release_date.gte=" + startDate
+                + "&primary_release_date.lte=" + endDate
                 + "&page=" + page;
 
-        // need dto to finish
-
-        return null;
+        return sendGet(endpoint, MovieResponseDTO.class);
     }
 
     public CreditsDTO getCredits(int movieId) {

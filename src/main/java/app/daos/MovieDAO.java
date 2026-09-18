@@ -8,13 +8,13 @@ import java.util.List;
 
         void create(Movie movie);
 
-        Movie getById(int id);
+        Movie getById(long id);
 
         List<Movie> getAll();
 
         Movie update(Movie movie);
 
-        void delete(int id);
+        void delete(long id);
 
         List<Movie> searchByTitle(String search);
 
@@ -28,7 +28,6 @@ import java.util.List;
 
         List<Movie> getTop10MostPopular();
     }
-
 
 
 

@@ -9,7 +9,15 @@ import java.util.List;
 
 public class MovieDAOImpl implements MovieDAO {
 
-    private EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory();
+    private final EntityManagerFactory emf;
+
+    public MovieDAOImpl() {
+        this(HibernateConfig.getEntityManagerFactory());
+    }
+
+    public MovieDAOImpl(EntityManagerFactory emf) {
+        this.emf = emf;
+    }
 
     @Override
     public void create(Movie movie) {
@@ -21,17 +29,21 @@ public class MovieDAOImpl implements MovieDAO {
     }
 
     @Override
-    public Movie getById(int id) {
+    public Movie getById(long id) {
         try (EntityManager em = emf.createEntityManager()) {
-            return em.find(Movie.class, id);
+            Movie movie = em.find(Movie.class, id);
+            loadRelationships(movie);
+            return movie;
         }
     }
 
     @Override
     public List<Movie> getAll() {
         try (EntityManager em = emf.createEntityManager()) {
-            return em.createQuery("SELECT m FROM Movie m", Movie.class)
+            List<Movie> movies = em.createQuery("SELECT m FROM Movie m", Movie.class)
                     .getResultList();
+            loadRelationships(movies);
+            return movies;
         }
     }
 
@@ -41,6 +53,7 @@ public class MovieDAOImpl implements MovieDAO {
             em.getTransaction().begin();
 
             Movie updatedMovie = em.merge(movie);
+            loadRelationships(updatedMovie);
 
             em.getTransaction().commit();
 
@@ -49,7 +62,7 @@ public class MovieDAOImpl implements MovieDAO {
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(long id) {
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
 
@@ -66,24 +79,28 @@ public class MovieDAOImpl implements MovieDAO {
     @Override
     public List<Movie> searchByTitle(String search) {
         try (EntityManager em = emf.createEntityManager()) {
-            return em.createQuery(
+            List<Movie> movies = em.createQuery(
                             "SELECT m FROM Movie m WHERE LOWER(m.title) LIKE LOWER(:search)",
                             Movie.class
                     )
                     .setParameter("search", "%" + search + "%")
                     .getResultList();
+            loadRelationships(movies);
+            return movies;
         }
     }
 
     @Override
     public List<Movie> getMoviesByGenre(String genreName) {
         try (EntityManager em = emf.createEntityManager()) {
-            return em.createQuery(
+            List<Movie> movies = em.createQuery(
                             "SELECT m FROM Movie m JOIN m.genres g WHERE LOWER(g.name) = LOWER(:genreName)",
                             Movie.class
                     )
                     .setParameter("genreName", genreName)
                     .getResultList();
+            loadRelationships(movies);
+            return movies;
         }
     }
 
@@ -103,36 +120,55 @@ public class MovieDAOImpl implements MovieDAO {
     @Override
     public List<Movie> getTop10HighestRated() {
         try (EntityManager em = emf.createEntityManager()) {
-            return em.createQuery(
+            List<Movie> movies = em.createQuery(
                             "SELECT m FROM Movie m ORDER BY m.rating DESC",
                             Movie.class
                     )
                     .setMaxResults(10)
                     .getResultList();
+            loadRelationships(movies);
+            return movies;
         }
     }
 
     @Override
     public List<Movie> getTop10LowestRated() {
         try (EntityManager em = emf.createEntityManager()) {
-            return em.createQuery(
+            List<Movie> movies = em.createQuery(
                             "SELECT m FROM Movie m ORDER BY m.rating ASC",
                             Movie.class
                     )
                     .setMaxResults(10)
                     .getResultList();
+            loadRelationships(movies);
+            return movies;
         }
     }
 
     @Override
     public List<Movie> getTop10MostPopular() {
         try (EntityManager em = emf.createEntityManager()) {
-            return em.createQuery(
+            List<Movie> movies = em.createQuery(
                             "SELECT m FROM Movie m ORDER BY m.popularity DESC",
                             Movie.class
                     )
                     .setMaxResults(10)
                     .getResultList();
+            loadRelationships(movies);
+            return movies;
+        }
+    }
+
+    private void loadRelationships(Movie movie) {
+        if (movie != null) {
+            movie.getActors().size();
+            movie.getGenres().size();
+        }
+    }
+
+    private void loadRelationships(List<Movie> movies) {
+        for (Movie movie : movies) {
+            loadRelationships(movie);
         }
     }
 }

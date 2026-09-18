@@ -9,7 +9,15 @@ import java.util.List;
 
 public class DirectorDAOImpl implements DirectorDAO {
 
-    private final EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory();
+    private final EntityManagerFactory emf;
+
+    public DirectorDAOImpl() {
+        this(HibernateConfig.getEntityManagerFactory());
+    }
+
+    public DirectorDAOImpl(EntityManagerFactory emf) {
+        this.emf = emf;
+    }
 
     @Override
     public void create(Director director) {
@@ -23,7 +31,7 @@ public class DirectorDAOImpl implements DirectorDAO {
     }
 
     @Override
-    public Director getById(int id) {
+    public Director getById(long id) {
         try (EntityManager em = emf.createEntityManager()) {
             return em.find(Director.class, id);
         }
@@ -68,7 +76,7 @@ public class DirectorDAOImpl implements DirectorDAO {
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(long id) {
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
 

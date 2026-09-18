@@ -8,7 +8,7 @@ import java.util.List;
 
         void create(Actor actor);
 
-        Actor getById(int id);
+        Actor getById(long id);
 
         Actor getByTmdbId(int tmdbId);
 
@@ -16,8 +16,7 @@ import java.util.List;
 
         Actor update(Actor actor);
 
-        void delete(int id);
+        void delete(long id);
     }
-
 
 
