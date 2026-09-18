@@ -79,7 +79,7 @@ JUnit and Testcontainers are used to test the DAO and service layers.
 
 ## Group Members
 
-Amaan
-Khattab
-Musa
-Rasull
+Amaan,
+Khattab,
+Musa,
+Rasull.
