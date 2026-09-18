@@ -9,7 +9,15 @@ import java.util.List;
 
 public class GenreDAOImpl implements GenreDAO {
 
-    private final EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory();
+    private final EntityManagerFactory emf;
+
+    public GenreDAOImpl() {
+        this(HibernateConfig.getEntityManagerFactory());
+    }
+
+    public GenreDAOImpl(EntityManagerFactory emf) {
+        this.emf = emf;
+    }
 
     @Override
     public void create(Genre genre) {
@@ -23,7 +31,7 @@ public class GenreDAOImpl implements GenreDAO {
     }
 
     @Override
-    public Genre getById(int id) {
+    public Genre getById(long id) {
         try (EntityManager em = emf.createEntityManager()) {
             return em.find(Genre.class, id);
         }
@@ -68,7 +76,7 @@ public class GenreDAOImpl implements GenreDAO {
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(long id) {
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
 

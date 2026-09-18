@@ -8,7 +8,7 @@ import java.util.List;
 
         void create(Director director);
 
-        Director getById(int id);
+        Director getById(long id);
 
         Director getByTmdbId(int tmdbId);
 
@@ -16,8 +16,7 @@ import java.util.List;
 
         Director update(Director director);
 
-        void delete(int id);
+        void delete(long id);
     }
-
 
 

@@ -9,7 +9,15 @@ import java.util.List;
 
 public class ActorDAOImpl implements ActorDAO {
 
-    private final EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory();
+    private final EntityManagerFactory emf;
+
+    public ActorDAOImpl() {
+        this(HibernateConfig.getEntityManagerFactory());
+    }
+
+    public ActorDAOImpl(EntityManagerFactory emf) {
+        this.emf = emf;
+    }
 
     @Override
     public void create(Actor actor) {
@@ -23,7 +31,7 @@ public class ActorDAOImpl implements ActorDAO {
     }
 
     @Override
-    public Actor getById(int id) {
+    public Actor getById(long id) {
         try (EntityManager em = emf.createEntityManager()) {
             return em.find(Actor.class, id);
         }
@@ -68,7 +76,7 @@ public class ActorDAOImpl implements ActorDAO {
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(long id) {
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
 

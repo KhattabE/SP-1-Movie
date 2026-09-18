@@ -8,7 +8,7 @@ import java.util.List;
 
         void create(Genre genre);
 
-        Genre getById(int id);
+        Genre getById(long id);
 
         Genre getByTmdbId(int tmdbId);
 
@@ -16,7 +16,6 @@ import java.util.List;
 
         Genre update(Genre genre);
 
-        void delete(int id);
+        void delete(long id);
     }
-
 
